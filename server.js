@@ -11,11 +11,14 @@ class Movie {
     }
 }
 
+//Data from json
+const dataFromJson = require('./Movie Data/data.json')
+
 // Sample movie data
 const spiderMan = new Movie(
-    "Spider-Man: No Way Home",
-    "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
-    `Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous forcing him to discover what it truly means to be Spider-Man.`
+  dataFromJson.title,
+  dataFromJson.poster_path,
+  dataFromJson.overview
   );
 
 
