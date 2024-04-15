@@ -1,6 +1,4 @@
-# Movies-Library
-
-# Project Name - Project Version
+# Movies-Library - 011v
 
 **Author Name**: *Ibrahim Nimer*
 
@@ -26,11 +24,9 @@ server.js , .gitignore  , .eslintrc
 
 6-Handle Errors:
 
-Home Page Endpoint (/): Display information about a specific movie.
-Favorite Page Endpoint (/favorite): Display a welcome message for the favorite page.
-Error Handling: Functions to handle server errors (status 500) and "page not found" errors (status 404).
-
-.  .  .
-
 ## Project Features
-<!-- What are the features included in you app -->
+Home Page Endpoint (/): Display information about a specific movie.
+
+Favorite Page Endpoint (/favorite): Display a welcome message for the favorite page.
+
+Error Handling: Functions to handle server errors (status 500) and "page not found" errors (status 404).
