@@ -1,5 +1,12 @@
 const express = require('express');
 const app = express();
+const PORT = 3000;
+
+
+// Pages handlers
+app.get('/' , homePageHandler);
+app.get('/favorite' , favoriteHandler)
+
 
 
 // Constructor function for creating movie objects
@@ -23,16 +30,15 @@ const spiderMan = new Movie(
 
 
 // Home page route
-app.get('/', (req, res) => {
-    res.json(spiderMan);
-  });
+function homePageHandler(req,res){
+  res.json(spiderMan)
+}
 
-
-  
 // Favorite Page Endpoint
-app.get('/favorite', (req, res) => {
+function favoriteHandler(req,res){
   res.send('Welcome to Favorite Page');
-});
+}
+
 
 // Error handling middleware for 404 - Page Not Found
 app.use((req, res, next) => {
@@ -47,5 +53,4 @@ app.use((err, req, res, next) => {
 
 
 // Start the server
-const PORT = 3000;
 app.listen(PORT);
