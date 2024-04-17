@@ -1,6 +1,4 @@
-# Movies-Library
-
-# Project Name - Project Version
+# Movies-Library - 011v
 
 **Author Name**: *Ibrahim Nimer*
 
@@ -10,13 +8,25 @@
 ## Overview
 
 ## Getting Started
-1-Set up your server repository 
 
-2-Install the required packages
+1-Clone the Repository:
 
-3-Build the  routes using the GET request
+2-Initialize Project:
+Run npm init -y 
 
-.  .  .
+3-Install Dependencies:
+by running npm install express cors.
+
+4-Create Basic File Structure:
+server.js , .gitignore  , .eslintrc
+
+5-Build Routes:
+
+6-Handle Errors:
 
 ## Project Features
-<!-- What are the features included in you app -->
+Home Page Endpoint (/): Display information about a specific movie.
+
+Favorite Page Endpoint (/favorite): Display a welcome message for the favorite page.
+
+Error Handling: Functions to handle server errors (status 500) and "page not found" errors (status 404).

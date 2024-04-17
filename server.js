@@ -1,5 +1,12 @@
 const express = require('express');
 const app = express();
+const PORT = 3000;
+
+
+// Pages handlers
+app.get('/' , homePageHandler);
+app.get('/favorite' , favoriteHandler)
+
 
 
 // Constructor function for creating movie objects
@@ -11,25 +18,27 @@ class Movie {
     }
 }
 
+//Data from json
+const dataFromJson = require('./Movie Data/data.json')
+
 // Sample movie data
 const spiderMan = new Movie(
-    "Spider-Man: No Way Home",
-    "/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
-    `Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous forcing him to discover what it truly means to be Spider-Man.`
+  dataFromJson.title,
+  dataFromJson.poster_path,
+  dataFromJson.overview
   );
 
 
 // Home page route
-app.get('/', (req, res) => {
-    res.json(spiderMan);
-  });
+function homePageHandler(req,res){
+  res.json(spiderMan)
+}
 
-
-  
 // Favorite Page Endpoint
-app.get('/favorite', (req, res) => {
+function favoriteHandler(req,res){
   res.send('Welcome to Favorite Page');
-});
+}
+
 
 // Error handling middleware for 404 - Page Not Found
 app.use((req, res, next) => {
@@ -44,5 +53,4 @@ app.use((err, req, res, next) => {
 
 
 // Start the server
-const PORT = 3000;
 app.listen(PORT);
