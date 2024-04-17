@@ -29,4 +29,10 @@ Home Page Endpoint (/): Display information about a specific movie.
 
 Favorite Page Endpoint (/favorite): Display a welcome message for the favorite page.
 
+Trending Page Endpoint (/trending): Display trending movies.
+
+Discover Page Endpoint (/discover): Display and Discover what new.
+
+Popular Page Endpoint (/popular): Display all-time popular movies.
+
 Error Handling: Functions to handle server errors (status 500) and "page not found" errors (status 404).
