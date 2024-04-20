@@ -35,4 +35,8 @@ Discover Page Endpoint (/discover): Display and Discover what new.
 
 Popular Page Endpoint (/popular): Display all-time popular movies.
 
+Add Movies Endpoint (/addMovies): Add new movies requested
+
+All Movies Endpoint (/allMovies): To see what you requested
+
 Error Handling: Functions to handle server errors (status 500) and "page not found" errors (status 404).

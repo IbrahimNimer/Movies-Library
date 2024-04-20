@@ -2,9 +2,17 @@ const express = require('express');
 const app = express();
 const cors = require('cors')
 const axios = require('axios')
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 require('dotenv').config()
 const port = process.env.PORT
 const apiKey = process.env.API_KEY
+
+const { Client } =  require('pg')
+//postgres://username:password@localhost:5432/darabasename
+const url =`postgres://ibrahim:0000@localhost:5432/movielibrary`
+const client = new Client(url)
 
 // Pages handlers
 app.get('/' , homePageHandler);
@@ -13,6 +21,8 @@ app.get('/trending' , trendingHandler)
 app.get('/search' , searchHandler)
 app.get('/discover' , discoverHandler)
 app.get('/popular' , popularHandler)
+app.post('/addMovies' , addMovieHandler)
+app.get('/allMovies', allMoviesHandler)
 
 
 
@@ -123,6 +133,32 @@ function popularHandler(req,res){
   })
 }
 
+// Post Movies Function
+function addMovieHandler(req, res) {
+  console.log(req.body)
+  const {original_title, release_date, poster_path, overview, comment }= req.body 
+  const  sql = `INSERT INTO movies(original_title, release_date, poster_path, overview, comment )
+  VALUES ($1, $2, $3, $4, $5) RETURNING *`;
+  const values = [original_title, release_date, poster_path, overview, comment] 
+  client.query(sql, values).then((reuslt)=>{
+      console.log(reuslt.rows)
+      res.status(201).json(reuslt.rows)
+  }).catch()
+}
+
+
+// ADD TO TABLE
+function allMoviesHandler(req,res){
+  const sql = `SELECT * FROM movies;`
+  client.query(sql).then((reuslt)=>{
+      const data = reuslt.rows
+      res.json(data)
+
+  })
+  .catch()
+
+}
+
 // Error handling middleware for 404 - Page Not Found
 app.use((req, res, next) => {
   res.status(404).json({ status: 404, responseText: 'Page not found' });
@@ -135,5 +171,11 @@ app.use((err, req, res, next) => {
 });
 
 
-// Start the server
-app.listen(port);
+// Listener 
+client.connect()
+.then(()=>{
+  app.listen(port, ()=>{
+  console.log(`listening to port ${port}`);
+  })
+})
+.catch()
