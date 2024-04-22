@@ -23,6 +23,9 @@ app.get('/discover' , discoverHandler)
 app.get('/popular' , popularHandler)
 app.post('/addMovies' , addMovieHandler)
 app.get('/allMovies', allMoviesHandler)
+app.put('/editMovie/:movieId' ,editMoviesHandler)
+app.delete('/DELETE/:id' , deleteMoviesHandler)
+app.get('/GET/:getId' , getMoviesHandler)
 
 
 
@@ -159,6 +162,45 @@ function allMoviesHandler(req,res){
 
 }
 
+// Edit Moives Function
+function editMoviesHandler(req, res){
+  
+  let id = req.params.movieId;
+  
+  let {original_title, release_date, poster_path, overview, comment} = req.body;
+  let sql = `UPDATE movies
+  SET original_title = $1, release_date = $2, poster_path = $3, overview = $4, comment = $5
+  WHERE id = $6;`;
+  let values = [original_title, release_date, poster_path, overview, comment, id];
+  client.query(sql, values).then(result=>{
+      res.send("successfuly updated")
+
+  }).catch()
+
+}
+
+function deleteMoviesHandler(req,res){
+    console.log(req.params)
+    let id = req.params.id;
+    let sql=`DELETE FROM movies WHERE id = $1 ;`;
+    let values = [id];
+    client.query(sql, values).then(result=>{
+        res.status(204).send("successfuly deleted")
+    }).catch()
+}
+
+
+// Get Movies Functio
+function getMoviesHandler(req,res){
+  console.log(req.params)
+  let id = req.params.getId;
+  let sql=`SELECT * FROM movies WHERE id = $1 ;`;
+  let values = [id];
+  client.query(sql, values).then(result=>{
+      const data = result.rows
+      res.json(data)
+  }).catch()
+}
 // Error handling middleware for 404 - Page Not Found
 app.use((req, res, next) => {
   res.status(404).json({ status: 404, responseText: 'Page not found' });
