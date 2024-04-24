@@ -11,7 +11,8 @@ const apiKey = process.env.API_KEY
 
 const { Client } =  require('pg')
 //postgres://username:password@localhost:5432/darabasename
-const url =`postgres://ibrahim:0000@localhost:5432/movielibrary`
+// const url =`postgres://ibrahim:0000@localhost:5432/movielibrary`  firt url
+const url = process.env.URL  //Cloud Url
 const client = new Client(url)
 
 // Pages handlers
