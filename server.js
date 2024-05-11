@@ -15,6 +15,8 @@ const { Client } =  require('pg')
 const url = process.env.URL  //Cloud Url
 const client = new Client(url)
 
+app.use(cors());
+
 // Pages handlers
 app.get('/' , homePageHandler);
 app.get('/favorite' , favoriteHandler)
